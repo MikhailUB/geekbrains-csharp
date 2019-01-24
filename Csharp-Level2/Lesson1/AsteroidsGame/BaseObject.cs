@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AsteroidsGame.Properties;
 using System.Drawing;
-using AsteroidsGame.Properties;
 
 namespace AsteroidsGame
 {
@@ -32,16 +27,10 @@ namespace AsteroidsGame
 			Pos.X += Dir.X;
 			Pos.Y += Dir.Y;
 
-			if (Pos.X < 0)
+			if (Pos.X < 0 || Game.Width < Pos.X)
 				Dir.X = -Dir.X;
 
-			if (Pos.X > Game.Width)
-				Dir.X = -Dir.X;
-
-			if (Pos.Y < 0)
-				Dir.Y = -Dir.Y;
-
-			if (Pos.Y > Game.Height)
+			if (Pos.Y < 0 || Game.Height < Pos.Y)
 				Dir.Y = -Dir.Y;
 		}
 	}

@@ -18,8 +18,11 @@ namespace AsteroidsGame
 		public override void Update()
 		{
 			Pos.X += Dir.X;
-			if (Pos.X < 0)
+			if (Pos.X < -Size.Width)
 				Pos.X = Game.Width + Size.Width;
+
+			if (Pos.X > (Game.Width + Size.Width))
+				Pos.X = -Size.Width;
 		}
 	}
 }

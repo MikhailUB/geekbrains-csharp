@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+Болотов Михаил
+Урок 1. Объектно-ориентированное программирование. Часть 1
+1. Добавить свои объекты в иерархию объектов, чтобы получился красивый задний фон, похожий на полет в звездном пространстве.
+2. *Заменить кружочки картинками, используя метод DrawImage.
+*/
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -51,23 +57,31 @@ namespace AsteroidsGame
 			var rand = new Random();
 
 			_objs = new BaseObject[objsCount];
-			for (int i = 0; i < _objs.Length / 2; i++)
+			for (int i = 0; i < _objs.Length -3 ; i++)
 			{
-				var side = rand.Next(3, 11);
-				_objs[i] = new BaseObject(new Point(Width, i * Height / objsCount), new Point(-i, -i), new Size(side, side));
+				int yPos = i * Height / objsCount;
+				if (i < _objs.Length / 2)
+				{
+					var side = rand.Next(3, 21);
+					_objs[i] = new BaseObject(new Point(Width, yPos), new Point(-i / 2, (3 - i) / 2), new Size(side, side));
+				}
+				else
+				{
+					var xDir = ((i % 2 == 0) ? -i : i) / 2;
+					var side = rand.Next(3, 8);
+					_objs[i] = new Star(new Point(Width, yPos + 50), new Point(xDir, 0), new Size(side, side));
+				}
 			}
-			for (int i = _objs.Length / 2; i < _objs.Length; i++)
-			{
-				var side = rand.Next(3, 7);
-				_objs[i] = new Star(new Point(Width, i * Height / objsCount), new Point(-i, 0), new Size(side, side));
-			}
+			_objs[objsCount - 3] = new Planet(new Point(Width - 300, 50), new Point(-1, 2), new Size(60, 60));
+			_objs[objsCount - 2] = new Planet(new Point(Width - 400, 150), new Point(-1, 1), new Size(45, 45), Brushes.SkyBlue);
+			_objs[objsCount - 1] = new Planet(new Point(Width - 500, 250), new Point(-2, 1), new Size(30, 30), Brushes.Coral);
 		}
 
 		public static void Draw()
 		{
 			// Проверяем вывод графики
 			Buffer.Graphics.Clear(Color.Black);
-			Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(Width - 300, 50, 100, 100));
+			//Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(Width - 300, 50, 100, 100));
 
 			foreach (var obj in _objs)
 			{

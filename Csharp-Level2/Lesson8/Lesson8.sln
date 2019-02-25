@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesWpfApp", "EmployeesWpfApp\EmployeesWpfApp.csproj", "{E03A410B-6E97-4765-8C12-798EE9E6C299}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesWebAPIService", "EmployeesWebAPIService\EmployeesWebAPIService.csproj", "{850CA55D-E805-40C2-92ED-276A73ACED61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesCommon", "EmployeesCommon\EmployeesCommon.csproj", "{EF68D57D-387B-43CC-9D75-4F92CF05F964}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E03A410B-6E97-4765-8C12-798EE9E6C299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03A410B-6E97-4765-8C12-798EE9E6C299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03A410B-6E97-4765-8C12-798EE9E6C299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{850CA55D-E805-40C2-92ED-276A73ACED61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{850CA55D-E805-40C2-92ED-276A73ACED61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{850CA55D-E805-40C2-92ED-276A73ACED61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{850CA55D-E805-40C2-92ED-276A73ACED61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF68D57D-387B-43CC-9D75-4F92CF05F964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF68D57D-387B-43CC-9D75-4F92CF05F964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF68D57D-387B-43CC-9D75-4F92CF05F964}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD4AF361-C8D3-4C94-B736-E36A1FFC9D8E}
+	EndGlobalSection
+EndGlobal

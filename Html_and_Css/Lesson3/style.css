@@ -1,0 +1,80 @@
+body {
+    background-color: #f8f8f8;
+}
+
+.menu-li-a {
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+    font-style: italic;
+    color: blueviolet;
+}
+
+.menu {
+    list-style-type: none;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.menu li {
+    display: inline;
+    padding: 20px;
+}
+
+.good-head {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+
+.good-text {
+    color: #707070;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+}
+
+.good-detail {
+    color: #484343;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
+
+.good-props {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: blue;
+    border-left: 1px;
+    border-left-color: blue;
+    border-left-style: solid;
+    list-style-image: url(images/marker.png);
+    padding-left: 25px;
+    margin-left: 10px;
+}
+
+.good-img {
+    border-width: 4px;
+    border-color: cornflowerblue;
+    border-style: ridge;
+}
+
+.textbox {
+    width: 300px;
+    height: 25px;
+    color: darkblue;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+.logo {
+    font-family: Verdana, sans-serif;
+    font-size: 24px;
+    color: darkviolet;
+}
+
+.logo a {
+    text-decoration: none;
+    vertical-align: middle;
+}

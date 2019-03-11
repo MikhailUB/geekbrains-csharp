@@ -1,0 +1,189 @@
+body {
+    background-color: #f8f8f8;
+}
+
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    background-image: url(images/header_fon.jpg);
+    height: 50px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer {
+    border-top: 1px solid black;
+    height: 20px;
+    background-color: gainsboro;
+    text-align: right;
+    margin: 0px;
+    padding: 20px 30px 0px 0px;
+}
+
+.menu-li-a {
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+    font-style: italic;
+    color: blueviolet;
+    transition: text-shadow .1s;
+}
+
+.menu-li-a:hover {
+    color: brown;
+    text-shadow: 0 0 100px brown, 0 0 100px brown;
+}
+
+.menu {
+    list-style-type: none;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.menu li {
+    display: inline;
+    padding: 20px;
+    padding-right: 0px;
+}
+
+.catalog {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.catalog-good {
+    padding: 10px;
+    width: 280px;
+}
+
+.good-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.good-text-block {
+    margin: 0px;
+    margin-left: 20px;
+}
+
+.buy {
+    width: 150px;
+    height: 35px;
+    font-size: 20px;
+    background-color: blueviolet;
+    color: white;
+}
+
+.buy:hover {
+    background-color: violet;
+    color: black;
+}
+
+.buy:active {
+    background-color: red;
+    color: white;
+}
+
+.good-head {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+
+.good-text {
+    color: #707070;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+    text-align: justify;
+}
+
+.good-detail {
+    color: #484343;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
+
+.good-props {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: blue;
+    border-left: 1px;
+    border-left-color: blue;
+    border-left-style: solid;
+    list-style-image: url(images/marker.png);
+    padding-left: 25px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.good-img {
+    border-width: 4px;
+    border-color: cornflowerblue;
+    border-style: ridge;
+    height: 300px;
+}
+
+.good-img:hover {
+    border-color: transparent;
+}
+
+.good-p:first-letter {
+    font-size: 20px;
+    color: red;
+}
+
+.props-block {
+    column-count: 2;
+}
+
+.textbox {
+    width: 300px;
+    height: 25px;
+    color: darkblue;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+.caps {
+    text-transform: capitalize;
+}
+
+.email:focus {
+    background-color: blanchedalmond;
+    color: red;
+}
+
+.logo {
+    margin-left: 25px;
+    font-family: Verdana, sans-serif;
+    font-size: 24px;
+    color: darkviolet;
+}
+
+.logo a {
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+table {
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+table tr:first-child {
+    height: 40px;
+}
+
+td {
+    background-color: gainsboro;
+    padding: 0px 10px;
+}

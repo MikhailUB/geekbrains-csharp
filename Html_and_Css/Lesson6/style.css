@@ -18,7 +18,6 @@ a {
 
 .slider {
     height: 800px;
-    background-image: url(img/slider.jpg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -72,16 +71,10 @@ a {
 
 .slider-text__h4 {
     color: #43a047;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
 }
 
 .slider-text__h2 {
     color: #212121;
-    font-size: 62px;
-    font-weight: 100;
-    letter-spacing: -3px;
 }
 
 .slider-text__p {
@@ -132,12 +125,7 @@ a {
 
 .fg-panel-first {
     border: 1px solid #9c9c9c;
-    background-color: #ffffff;
-    opacity: 0.9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-image: url(img/fg-product-1.jpg);
 }
 
 
@@ -150,8 +138,6 @@ a {
 
 .fg-menu__ref {
     color: #6c6c6c;
-    font-size: 36px;
-    font-weight: 700;
     padding: 0px 20px 19px 9px;
     border-bottom: 1px solid #6c6c6c;
 }
@@ -171,11 +157,12 @@ a {
     border-bottom: 3px solid #212121;
 }
 
-.fg_all-ref {
+.all-ref {
     color: #212121;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: 3.6px;
+    padding-top: 13px;
 }
 
 .fg-panel-first__p {
@@ -261,12 +248,11 @@ a {
 
 .tg-header__h3 {
     color: #212121;
-    font-size: 36px;
-    font-weight: 700;
 }
 
 .menu__ref:hover {
     color: #212121;
+    border-bottom: 1px solid #212121; 
 }
 
 .button:hover {
@@ -279,15 +265,10 @@ a {
 
 .exclusive__h4 {
     color: #1e88e5;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
 }
 
 .exclusive__h3 {
     color: #212121;
-    font-size: 36px;
-    font-weight: 700;
 }
 
 .exclusive__p {
@@ -295,3 +276,59 @@ a {
     margin-top: 20px;
     margin-bottom: 32px;
 }
+
+.fg-text {
+    background-color: #ffffff;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.slader2 {
+    background-image: url(img/slider-2.jpg);
+}
+
+.slider1 {
+    background-image: url(img/slider.jpg);
+}
+
+.text-h4 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.text-h2 {
+    font-size: 62px;
+    font-weight: 100;
+    letter-spacing: -3px;
+}
+
+.text-h3 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.slider2__h4 {
+    color: #e53935;
+}
+
+.all-ref:hover {
+    border-bottom: 2px solid #212121;
+}
+
+
+
+.good:hover {
+    opacity: 0.7;
+}
+
+.slider__circle:hover {
+    background-color: #212121;
+}
+
+

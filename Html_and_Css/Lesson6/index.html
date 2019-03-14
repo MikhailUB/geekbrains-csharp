@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="container">
-        <div class="slider padding-site">
+        <!-- Слайдер 1 -->
+        <div class="slider slider1 padding-site">
             <div class="header">
                 <a class="logo" href="#"><img src="img/logo.svg" alt="logo"></a>
                 <ul class="menu">
@@ -21,9 +22,9 @@
                 </ul>
             </div>
             <div class="slider-text">
-                <h4 class="slider-text__h4">TRENDING</h4>
-                <h2 class="slider-text__h2">FISHNET CHAIR</h2>
-                <p class="slider-text__p text-p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black.</p>
+                <h4 class="text-h4 slider-text__h4">TRENDING</h4>
+                <h2 class="text-h2 slider-text__h2">FISHNET CHAIR</h2>
+                <p class="text-p slider-text__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black.</p>
                 <a href="#" class="button">ORDER US <img src="img/arrow.svg" alt="arrow"></a>
             </div>
             <div class="slider-pagination">
@@ -32,57 +33,82 @@
                 <a href="#" class="slider__circle"></a>
             </div>
         </div>
+        
+        <!-- Особенные товары Новинки -->
         <div class="feature-goods padding-site">
             <div class="fg-header">
                 <ul class="fg-menu">
-                    <li><a href="#" class="fg-menu__ref fg-menu__ref-active">Featured</a></li>
-                    <li><a href="#" class="fg-menu__ref">New</a></li>
+                    <li><a href="#" class="text-h3 fg-menu__ref fg-menu__ref-active">Featured</a></li>
+                    <li><a href="#" class="text-h3 fg-menu__ref">New</a></li>
                 </ul>
-                <a href="#" class="fg_all-ref">EXPLORE ALL <img src="img/arrow.svg" alt="arrow"></a>
+                <a href="#" class="all-ref">EXPLORE ALL <img src="img/arrow.svg" alt="arrow"></a>
             </div>
             <div class="fg-panel">
                 <div class="fg-panel-first good-img">
-                    <a href="#" class="button button-empty"><img src="img/arrow.svg" alt="arrow"></a>
-                    <h4 class="fg-panel-first__h4">Fishnet Chair</h4>
-                    <p class="fg-panel-first__p text-p">Seat and back with upholstery made of cold cure</p>
+                   <div class="fg-text good-img">
+                        <a href="#" class="button button-empty"><img src="img/arrow.svg" alt="arrow"></a>
+                        <h4 class="fg-panel-first__h4">Fishnet Chair</h4>
+                        <p class="text-p fg-panel-first__p">Seat and back with upholstery made of cold cure</p>
+                   </div>
                 </div>
-                <a href="#" class="good-img"><img src="img/fg-product-2.jpg" alt="product-2"></a>
-                <a href="#" class="good-img"><img src="img/fg-product-3.jpg" alt="product-3"></a>
-                <a href="#" class="good-img"><img src="img/fg-product-4.jpg" alt="product-4"></a>
+                <a href="#" class="good-img good"><img src="img/fg-product-2.jpg" alt="product-2"></a>
+                <a href="#" class="good-img good"><img src="img/fg-product-3.jpg" alt="product-3"></a>
+                <a href="#" class="good-img good"><img src="img/fg-product-4.jpg" alt="product-4"></a>
             </div>
         </div>
+        
+        <!-- Эксклюзив -->
         <div class="exclusive">
             <div class="exclusive-block promo1">
                 <div class="exclusive-text">
-                    <h4 class="exclusive__h4">EXCLUSIVE</h4>
-                    <h3 class="exclusive__h3">Fishnet Chair</h3>
-                    <p class="exclusive__p text-p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
+                    <h4 class="text-h4 exclusive__h4">EXCLUSIVE</h4>
+                    <h3 class="text-h3 exclusive__h3">Fishnet Chair</h3>
+                    <p class="text-p exclusive__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
                     <a href="#" class="button">ORDER US <img src="img/arrow.svg" alt="arrow"></a>
                 </div>
             </div>
             <div class="exclusive-block promo2">
                 <div class="exclusive-text">
-                    <h4 class="exclusive__h4">EXCLUSIVE</h4>
-                    <h3 class="exclusive__h3">Fishnet Chair</h3>
-                    <p class="exclusive__p text-p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
+                    <h4 class="text-h4 exclusive__h4">EXCLUSIVE</h4>
+                    <h3 class="text-h3 exclusive__h3">Fishnet Chair</h3>
+                    <p class="text-p exclusive__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
                     <a href="#" class="button">ORDER US <img src="img/arrow.svg" alt="arrow"></a>
                 </div>
             </div>
         </div>
+
+        <!-- Популярные товары -->
         <div class="trend-goods padding-site">
            <div class="tg-header">
-                <h3 class="tg-header__h3">Trending Products</h3>
-                <a href="#" class="fg_all-ref">EXPLORE ALL <img src="img/arrow.svg" alt="arrow"></a>
+                <h3 class="text-h3 tg-header__h3">Trending Products</h3>
+                <a href="#" class="all-ref">EXPLORE ALL <img src="img/arrow.svg" alt="arrow"></a>
            </div>
             <div class="tr-goods-panel">
-                <a href="#" class="trend-good"><img src="img/tr-product1.jpg" alt="product-1"></a>
-                <a href="#" class="trend-good"><img src="img/tr-product2.jpg" alt="product-2"></a>
-                <a href="#" class="trend-good"><img src="img/tr-product3.jpg" alt="product-3"></a>
-                <a href="#" class="trend-good"><img src="img/tr-product4.jpg" alt="product-4"></a>
-                <a href="#" class="trend-good"><img src="img/tr-product5.jpg" alt="product-5"></a>
-                <a href="#" class="trend-good"><img src="img/tr-product6.jpg" alt="product-6"></a>
+                <a href="#" class="trend-good good"><img src="img/tr-product1.jpg" alt="product-1"></a>
+                <a href="#" class="trend-good good"><img src="img/tr-product2.jpg" alt="product-2"></a>
+                <a href="#" class="trend-good good"><img src="img/tr-product3.jpg" alt="product-3"></a>
+                <a href="#" class="trend-good good"><img src="img/tr-product4.jpg" alt="product-4"></a>
+                <a href="#" class="trend-good good"><img src="img/tr-product5.jpg" alt="product-5"></a>
+                <a href="#" class="trend-good good"><img src="img/tr-product6.jpg" alt="product-6"></a>
             </div>
         </div>
+        
+        <!-- Слайдер 2 -->
+        <div class="slider slader2 padding-site">
+            <div></div>
+            <div class="slider-text">
+                <h4 class="text-h4 slider2__h4">TRENDING</h4>
+                <h2 class="text-h2 slider-text__h2">FISHNET CHAIR</h2>
+                <p class="text-p slider-text__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black.</p>
+                <a href="#" class="button">ORDER US <img src="img/arrow.svg" alt="arrow"></a>
+            </div>
+            <div class="slider-pagination">
+                <a href="#" class="slider__circle"></a>
+                <a href="#" class="slider__circle slider__circle_active"></a>
+                <a href="#" class="slider__circle"></a>
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>

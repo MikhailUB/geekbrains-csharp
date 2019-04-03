@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WebStore.Models.Employee>
+
+<a asp-controller="Home" asp-action="Index">На главную</a>
+<hr />
+	
+<h3>Сотрудники</h3>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Фамилия</th>
+			<th>Имя</th>
+			<th>Отчество</th>
+			<th>Возраст</th>
+			<th>Дата приема</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var empl in Model)
+		{
+		<tr>
+			<td>@empl.Id</td>
+			<td>@empl.SurName</td>
+			<td>@empl.Name</td>
+			<td>@empl.Patronymic</td>
+			<td>@empl.Age</td>
+			<td>@empl.StartWork.ToShortDateString()</td>
+			<td><a asp-controller="Employes" asp-action="Details" asp-route-id="@empl.Id">Открыть</a></td>
+		</tr>
+		}
+	</tbody>
+</table>

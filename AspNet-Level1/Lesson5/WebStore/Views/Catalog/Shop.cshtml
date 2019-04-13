@@ -1,0 +1,26 @@
+﻿@model WebStore.ViewModels.CatalogViewModel
+
+@{
+	ViewData["Title"] = "Shop";
+	Layout = "_LayoutBase";
+}
+
+<section id="advertisement">
+	<div class="container">
+		<img src="~/images/shop/advertisement.jpg" alt="" />
+	</div>
+</section>
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				@await Html.PartialAsync("Partial/_LeftSideBar")
+			</div>
+
+			<div class="col-sm-9 padding-right">
+				@await Html.PartialAsync("Partial/_FeaturesItems", Model.Products)
+			</div>
+		</div>
+	</div>
+</section>

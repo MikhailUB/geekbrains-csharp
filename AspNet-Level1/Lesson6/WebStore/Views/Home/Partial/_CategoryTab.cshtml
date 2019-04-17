@@ -1,0 +1,37 @@
+﻿<div class="category-tab">
+    <!--category-tab-->
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs">
+            @for (var category_index = 1; category_index <= 5; category_index++)
+            {
+                <li @(category_index == 1 ? "class=active" : null)><a href="#@($"category{category_index}")" data-toggle="tab">Категория @category_index</a></li>
+            }
+        </ul>
+    </div>
+    <div class="tab-content">
+        @{
+            var rnd = new Random();
+        }
+        @for (var category_index = 1; category_index <= 5; category_index++)
+        {
+            <div class="tab-pane fade @(category_index == 1 ? "active in" : null)" id="category@(category_index)">
+                @for (var product_index = 1; product_index <= 4; product_index++)
+                {
+                    <div class="col-sm-3">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="~/images/home/@($"gallery{product_index}").jpg" alt="" />
+                                    <h2>@rnd.Next(10,100).ToString("C")</h2>
+                                    <p>Товар @product_index</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        }
+    </div>
+</div><!--/category-tab-->

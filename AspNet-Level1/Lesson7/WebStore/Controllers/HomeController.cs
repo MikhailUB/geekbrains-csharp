@@ -6,13 +6,9 @@ namespace WebStore.Controllers
 	{
 		public IActionResult Index() => View();
 
-		public IActionResult ProductDetails() => View();
-
 		public IActionResult ContactUs() => View();
 
 		public IActionResult Checkout() => View();
-
-		public IActionResult Cart() => View();
 
 		public IActionResult Blog() => View();
 

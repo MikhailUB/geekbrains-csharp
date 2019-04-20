@@ -38,5 +38,13 @@ namespace WebStore.Infrastructure.Implementations
 
 			return products.AsEnumerable();
 		}
+
+		public Product GetProductById(int id)
+		{
+			return _db.Products
+				.Include(prod => prod.Brand)
+				.Include(prod => prod.Section)
+				.FirstOrDefault(prod => prod.Id == id);
+		}
 	}
 }

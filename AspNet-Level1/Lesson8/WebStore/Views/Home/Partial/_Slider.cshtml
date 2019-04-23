@@ -1,0 +1,46 @@
+﻿<section id="slider">
+	<!--slider-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						@for (var i = 0; i < 3; i++)
+						{
+							<li data-target="#slider-carousel" data-slide-to="@i" @(i == 0 ? "class=\"active\"" : null)></li>
+						}
+					</ol>
+
+					<div class="carousel-inner">
+						@for (var i = 1; i <= 3; i++)
+						{
+							var img_url = $"/images/home/girl{i}.jpg";
+
+							<div class="item @(i == 1 ? "active" : null)">
+								<div class="col-sm-6">
+									<h1><span>E</span>-SHOPPER</h1>
+									<h2>Онлайн магазин</h2>
+									<p>Пример рекламы товаров </p>
+									<button type="button" class="btn btn-default get">В корзину</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="@img_url" class="girl img-responsive" alt="" />
+									<img src="~/images/home/pricing.png" class="pricing" alt="" />
+								</div>
+							</div>
+
+						}
+					</div>
+
+					<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+						<i class="fa fa-angle-left"></i>
+					</a>
+					<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+						<i class="fa fa-angle-right"></i>
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section><!--/slider-->

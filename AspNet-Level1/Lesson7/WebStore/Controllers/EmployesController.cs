@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 
 namespace WebStore.Controllers
 {
+	[Authorize]
 	public class EmployesController : Controller
 	{
 		private readonly IEmployeesData _employeesData;
@@ -29,6 +30,7 @@ namespace WebStore.Controllers
 			return NotFound();
 		}
 
+		[Authorize(Roles = Domain.Entities.User.RoleAdmin)]
 		public IActionResult Edit(int? id)
 		{
 			Employee employee;
@@ -46,6 +48,7 @@ namespace WebStore.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = Domain.Entities.User.RoleAdmin)]
 		public IActionResult Edit(Employee employee, [FromServices]IMapper mapper)
 		{
 			if (!ModelState.IsValid)
@@ -78,6 +81,7 @@ namespace WebStore.Controllers
 			return RedirectToAction("Index");
 		}
 
+		[Authorize(Roles = Domain.Entities.User.RoleAdmin)]
 		public IActionResult Delete(int id)
 		{
 			var empl = _employeesData.GetById(id);

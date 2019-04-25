@@ -1,13 +1,13 @@
 ﻿<div class="shop-menu pull-right">
 	<ul class="nav navbar-nav">
-		<li><a href="#"><i class="fa fa-user"></i> @User.Identity.Name</a></li>
-		@if (User.IsInRole("admin"))
+		<li><a asp-controller="Profile" asp-action="Index"><i class="fa fa-user"></i> @User.Identity.Name</a></li>
+		@if (User.IsInRole(WebStore.Domain.Entities.User.RoleAdmin))
 		{
-			<li><a href="#"><i class="fa fa-key"></i> Адмистрирование</a></li>
+			<li><a asp-area="Admin" asp-controller="Home" asp-action="Index" ><i class="fa fa-key"></i> Адмистрирование</a></li>
 		}
 		<li><a href="#"><i class="fa fa-star"></i> Список желаний</a></li>
-		<li><a asp-controller="Home" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Оформление заказа</a></li>
-		<li><a asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
-		<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i> Выход</a></li>
+		<li><a asp-area="" asp-controller="Profile" asp-action="Orders"><i class="fa fa-crosshairs"></i> Заказы</a></li>
+		<li><a asp-area="" asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+		<li><a asp-area="" asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i> Выход</a></li>
 	</ul>
 </div>

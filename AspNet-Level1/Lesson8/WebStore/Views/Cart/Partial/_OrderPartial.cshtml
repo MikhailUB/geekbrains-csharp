@@ -1,0 +1,36 @@
+﻿@model WebStore.ViewModels.OrderViewModel
+
+<form method="post" asp-antiforgery="true" asp-action="CheckOut" asp-area="" asp-controller="Cart">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<div class="col-sm-6">
+		<input asp-for="Name" />
+		<span asp-validation-for="Name" class="text-danger"></span>
+
+		<input asp-for="Phone" />
+		<span asp-validation-for="Phone" class="text-danger"></span>
+
+		<input asp-for="Address" />
+		<span asp-validation-for="Address" class="text-danger"></span>
+	</div>
+
+	@{
+		ViewData.TryGetValue("SumCart", out var sum_info);
+	}
+
+	<div class="col-sm-6">
+		<div class="total_area">
+			@if (sum_info != null)
+			{
+				var sum = (decimal)sum_info;
+				<ul>
+					<li>Итого <span>@sum.ToString("C")</span></li>
+				</ul>
+				if (sum > 0)
+				{
+					<input type="submit" value="Оформить заказ" class="btn btn-default check_out" />
+				}
+			}
+		</div>
+	</div>
+</form>

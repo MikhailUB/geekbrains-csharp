@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebStore.ViewModels.UserOrderViewModel>
+@{
+	ViewData["Title"] = "Заказы";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Номер</th>
+			<th>Имя</th>
+			<th>Адрес</th>
+			<th>Телефон</th>
+			<th>Сумма</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var order in Model)
+		{
+			<tr>
+				<td>@order.Id</td>
+				<td>@order.Name</td>
+				<td>@order.Address</td>
+				<td>@order.Phone</td>
+				<td>@order.TotalSum.ToString("C")</td>
+			</tr>
+		}
+	</tbody>
+</table>

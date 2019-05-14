@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfTestMailSender.SendEndWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTestMailSender"
+        mc:Ignorable="d"
+        Title="Информация" Height="175" Width="400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+		<Label Content="Письмо отправлено!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" />
+		<Button x:Name="_okButton" Content="ОК" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15" Width="150" Height="30" FontSize="20" Click="OkButton_Click"/>
+	</Grid>
+</Window>

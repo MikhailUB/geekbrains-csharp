@@ -3,8 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.library"
+        xmlns:linq2sql="clr-namespace:MailSender.lib.Data.Linq2Sql;assembly=MailSender.library"
+        xmlns:components="clr-namespace:MailSender.Components"
         xmlns:local="clr-namespace:MailSender"
-        mc:Ignorable="d"
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+		mc:Ignorable="d"
 
 		Title="MainWindow"
 		Height="450" Width="800">
@@ -24,95 +29,211 @@
 			<MenuItem Header="Help" IsEnabled="False"/>
 		</Menu>
 		<StatusBar DockPanel.Dock="Bottom">
-			<TextBlock Text="Текст в статус баре"/>
+			<DockPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StatusBar}}">
+				<components:TabItemsControl DockPanel.Dock="Right" x:Name="LeftRightButtons" Width="150" Height="16" Margin="0,0,7,0"
+							LeftButtonClick="OnLeftButtonClick" RightButtonClick="OnRightButtonClick" />
+				<TextBlock Text="Текст в статус баре"/>
+			</DockPanel>
 		</StatusBar>
-		<TabControl>
+		<TabControl x:Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged">
 			<TabItem Header="Списки">
-
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<ToolBarTray Grid.Row="0" >
+						<ToolBarTray.Resources>
+							<Style TargetType="Image">
+								<Setter Property="Height" Value="16"/>
+							</Style>
+							<Style TargetType="fa:ImageAwesome">
+								<Setter Property="Height" Value="16"/>
+								<Setter Property="Effect">
+									<Setter.Value>
+										<DropShadowEffect BlurRadius="1" ShadowDepth="1" />
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ToolBarTray.Resources>
+						<ToolBar Band="0" BandIndex="0">
+							<TextBlock Text="Отправители:" VerticalAlignment="Center" MinWidth="75" Margin="5,0"/>
+							<ComboBox SelectedIndex="0" Width="120" ItemsSource="{x:Static data:TestData.Senders}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate DataType="data:Sender">
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="{Binding Name}"/>
+											<TextBlock Text="{Binding Email}" Opacity="0.7" Margin="3,0,0,0"/>
+										</StackPanel>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+								<!--
+								<ComboBoxItem Content="Отправитель1" />
+								<ComboBoxItem Content="Отправитель2" />
+								<ComboBoxItem Content="Отправитель3" />
+								-->
+							</ComboBox>
+							<Button>
+								<Image Source="Media/add.png" />
+							</Button>
+							<Button>
+								<Image Source="Media/edit.png" />
+							</Button>
+							<Button>
+								<Image Source="Media/remove.png" />
+							</Button>
+						</ToolBar>
+						<ToolBar Band="0" BandIndex="1">
+							<Button Click="OnToSchedulerClick">
+								<StackPanel Orientation="Horizontal">
+									<fa:ImageAwesome Icon="ClockOutline" Foreground="Blue"/>
+									<TextBlock Text="Перейти в планировщик" Margin="5,0,0,0"/>
+								</StackPanel>
+							</Button>
+						</ToolBar>
+						<ToolBar Band="1" BandIndex="0">
+							<TextBlock Text="Серверы:" VerticalAlignment="Center" MinWidth="75" Margin="5,0"/>
+							<ComboBox SelectedIndex="0" Width="120" ItemsSource="{x:Static data:TestData.Servers}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate DataType="data:Server">
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="{Binding Name}"/>
+											<TextBlock Text="{Binding Address}" ToolTip="{Binding StringFormat=Порт: {0}, Path=Port }" Margin="5,0,0,0"/>
+										</StackPanel>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+								<!--
+								<ComboBoxItem Content="Сервер1" />
+								<ComboBoxItem Content="Сервер2" />
+								<ComboBoxItem Content="Сервер3" />
+								-->
+							</ComboBox>
+							<Button>
+								<fa:ImageAwesome Icon="Plus" Foreground="Green"/>
+							</Button>
+							<Button>
+								<fa:ImageAwesome Icon="Edit" Foreground="Blue"/>
+							</Button>
+							<Button>
+								<fa:ImageAwesome Icon="Remove" Foreground="Red"/>
+							</Button>
+						</ToolBar>
+						<ToolBar Band="1" BandIndex="1">
+							<TextBlock Text="Список адресатов" VerticalAlignment="Center"/>
+							<Button>
+								<fa:ImageAwesome Icon="Plus" Foreground="Green"/>
+							</Button>
+							<Button>
+								<fa:ImageAwesome Icon="Edit" Foreground="Blue"/>
+							</Button>
+							<Button>
+								<fa:ImageAwesome Icon="Remove" Foreground="Red"/>
+							</Button>
+						</ToolBar>
+					</ToolBarTray>
+					<GroupBox Grid.Row="1" Header="Получатели" Margin="0,3,0,0">
+						<GroupBox.Resources>
+							<linq2sql:MailSenderDB x:Key="Database"/>
+						</GroupBox.Resources>
+						<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipient, Source={StaticResource Database}}"
+								IsReadOnly="True" HeadersVisibility="Column" 
+								GridLinesVisibility="Vertical"
+								VerticalGridLinesBrush="DarkGray"
+								AlternatingRowBackground="Linen">
+							<DataGrid.Columns>
+								<DataGridTextColumn Header="ID" MinWidth="40" Binding="{Binding Id}"/>
+								<DataGridTextColumn Header="Имя" MinWidth="150" Binding="{Binding Name}"/>
+								<DataGridTextColumn Header="eMail" Width="*" Binding="{Binding Email}"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</GroupBox>
+				</Grid>
 			</TabItem>
-			<TabItem Header="Планировщик">
-
+			<TabItem Header="Планировщик" x:Name="SchedulerTab">
+				<DockPanel>
+					<StackPanel>
+						<TextBlock Text="Дата:" Margin="3,0"/>
+						<Calendar></Calendar>
+						<DockPanel>
+							<TextBlock Text="Время:" Margin="3,0"/>
+							<xctk:TimePicker Value="15:30" Format="Custom" FormatString="HH:mm"/>
+						</DockPanel>
+						<StackPanel Margin="5,0">
+							<StackPanel.Resources>
+								<Style TargetType="Button">
+									<Setter Property="Background" Value="White"/>
+									<Setter Property="Margin" Value="0,5,0,0"/>
+									<Setter Property="BorderBrush" Value="Black"/>
+									<Style.Triggers>
+										<Trigger Property="IsMouseOver"  Value="true">
+											<Setter Property="Foreground" Value="Blue"/>
+											<Setter Property="FontWeight" Value="Bold"/>
+										</Trigger>
+									</Style.Triggers>
+								</Style>
+								<Style TargetType="fa:ImageAwesome">
+									<Setter Property="Height" Value="16"/>
+									<Setter Property="Margin" Value="0,0,5,0"/>
+								</Style>
+							</StackPanel.Resources>
+							<Button>
+								<DockPanel>
+									<fa:ImageAwesome Icon="ClockOutline" />
+									<TextBlock Text="Запланировать" Margin="3,0"/>
+								</DockPanel>
+							</Button>
+							<Button>
+								<DockPanel>
+									<fa:ImageAwesome Icon="Send" Foreground="Blue"/>
+									<TextBlock Text="Отправить сейчас" Margin="3,0"/>
+								</DockPanel>
+							</Button>
+						</StackPanel>
+					</StackPanel>
+					<GroupBox Header="Задачи планировщика">
+						<ListBox>
+							<ListBoxItem Content="Задача 1"/>
+							<ListBoxItem Content="Задача 2"/>
+							<ListBoxItem Content="Задача 3"/>
+						</ListBox>
+					</GroupBox>
+				</DockPanel>
 			</TabItem>
 			<TabItem Header="Письма">
-
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition MinWidth="120" MaxWidth="220"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<GroupBox Grid.Column="0" Header="Список писем">
+						<DockPanel>
+							<StackPanel DockPanel.Dock="Bottom">
+								<Button Content="Создать"/>
+								<Button Content="Редактировать"/>
+								<Button Content="Удалить"/>
+							</StackPanel>
+							<ListBox>
+								<ListBoxItem Content="Письмо 1"/>
+								<ListBoxItem Content="Письмо 2"/>
+								<ListBoxItem Content="Письмо 3"/>
+							</ListBox>
+						</DockPanel>
+					</GroupBox>
+					<GroupBox Grid.Column="1" Header="Письмо">
+						<DockPanel>
+							<GroupBox Header="Заголовок" DockPanel.Dock="Top">
+								<TextBox/>
+							</GroupBox>
+							<GroupBox Header="Текст">
+								<TextBox AcceptsReturn="True"/>
+							</GroupBox>
+						</DockPanel>
+					</GroupBox>
+					<GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Background="Transparent" Width="7" />
+				</Grid>
 			</TabItem>
 			<TabItem Header="Статистика">
 
-			</TabItem>
-			<TabItem Header="Панели компоновки">
-				<TabControl>
-					<TabItem Header="StackPanel">
-						<StackPanel>
-							<Button Margin="10 5 5 10">Кнопка 111</Button>
-							<Button HorizontalAlignment="Left" Width="200" Height="30" Margin="10 5 5 10">Кнопка 222</Button>
-							<Button HorizontalAlignment="Center" Width="200" Height="35" Margin="10 5 5 10">Кнопка 333</Button>
-							<TextBox>123321</TextBox>
-							<TextBlock>Мой текст</TextBlock>
-							<StackPanel Orientation="Horizontal">
-								<Button Margin="10 5 5 10" Width="150">Кнопка 111</Button>
-								<Button Margin="10 5 5 10" Width="150">Кнопка 222</Button>
-								<Button Margin="10 5 5 10" Width="150">Кнопка 333</Button>
-								<Button Margin="10 5 5 10" Width="150">Кнопка 444</Button>
-							</StackPanel>
-						</StackPanel>
-					</TabItem>
-					<TabItem Header="Grid">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="50" />
-								<RowDefinition Height="0.5*"/>
-								<RowDefinition/>
-								<RowDefinition/>
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="200"/>
-								<ColumnDefinition/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-							<Button Content="Button1"/>
-							<Button Grid.Row="1" Grid.Column="1" Content="Button2"/>
-							<Button Grid.Row="2" Grid.Column="2" Content="Button3"/>
-						</Grid>
-					</TabItem>
-					<TabItem Header="Canvas">
-						<Canvas>
-							<Button Content="Button 111" Width="150" Height="30" Canvas.Left="100" Canvas.Top="20"/>
-							<TextBox Text="Hello World!" Width="200" Canvas.Right="100" Canvas.Bottom="50" />
-						</Canvas>
-					</TabItem>
-					<TabItem Header="WrapPanel">
-						<WrapPanel Orientation="Horizontal">
-							<Button Content="Кнопка 1" Padding="70,20" Margin="5,10" />
-							<Button Content="Кнопка 2" Padding="70,20" Margin="5,10" />
-							<Button Content="Кнопка 3" Padding="70,20" Margin="5,10" />
-							<Button Content="Кнопка 4" Padding="70,20" Margin="5,10" />
-						</WrapPanel>
-					</TabItem>
-					<TabItem Header="UniformGrig">
-						<UniformGrid Columns="1" Rows="4" VerticalAlignment="Top">
-							<Button Content="Button 1" Height="30"/>
-							<Button Content="Button 2"/>
-							<TextBox Text="Введите что-то здесь"/>
-							<Button Content="Button 4"/>
-						</UniformGrid>
-					</TabItem>
-					<TabItem Header="DockPanel">
-						<DockPanel>
-							<Button DockPanel.Dock="Left" Content="Button 1"/>
-							<Button DockPanel.Dock="Top" Content="Button 2"/>
-							<Button DockPanel.Dock="Right" Content="Button 3"/>
-							<TextBox DockPanel.Dock="Bottom" Text="Поле для текста"/>
-							<Rectangle Stroke="Red" StrokeThickness="5" StrokeDashArray="5" RadiusX="50" RadiusY="50">
-								<Rectangle.Fill>
-									<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-										<GradientStop Color="#FF15B031" Offset="0.8"/>
-										<GradientStop Color="#FF1727BF"/>
-									</LinearGradientBrush>
-								</Rectangle.Fill>
-							</Rectangle>
-						</DockPanel>
-					</TabItem>
-				</TabControl>
 			</TabItem>
 		</TabControl>
 	</DockPanel>

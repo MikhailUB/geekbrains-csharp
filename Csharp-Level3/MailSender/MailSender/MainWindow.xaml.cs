@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MailSender.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,41 @@ namespace MailSender
 		private void ExitOnClick(object sender, RoutedEventArgs e)
 		{
 			Close();
+		}
+
+		private void OnLeftButtonClick(object sender, EventArgs e)
+		{
+			if (!(sender is TabItemsControl tabControl))
+				return;
+
+			if (tabControl.LeftButtonEnabled)
+				MainTabControl.SelectedIndex--;
+		}
+
+		private void OnRightButtonClick(object sender, EventArgs e)
+		{
+			if (!(sender is TabItemsControl tabControl))
+				return;
+
+			if (tabControl.RightButtonEnabled)
+				MainTabControl.SelectedIndex++;
+		}
+
+		private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			LeftRightButtons.LeftButtonEnabled = MainTabControl.SelectedIndex > 0;
+			LeftRightButtons.RightButtonEnabled = MainTabControl.SelectedIndex < MainTabControl.Items.Count - 1;
+		}
+
+		private void RefreshLeftRightButtonEnabled()
+		{
+			LeftRightButtons.LeftButtonEnabled = MainTabControl.SelectedIndex > 0;
+			LeftRightButtons.RightButtonEnabled = MainTabControl.SelectedIndex < MainTabControl.Items.Count - 1;
+		}
+
+		private void OnToSchedulerClick(object sender, RoutedEventArgs e)
+		{
+			MainTabControl.SelectedItem = SchedulerTab;
 		}
 	}
 }

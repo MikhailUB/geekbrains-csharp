@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="MailSender.View.RecipientInfoEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MailSender.View"
+             mc:Ignorable="d" 
+			 DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+             d:DesignHeight="380" d:DesignWidth="280">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<TextBox Grid.Row="0" Grid.Column="0" Text="Id:"/>
+		<TextBox Grid.Row="1" Grid.Column="0" Text="Имя:"/>
+		<TextBox Grid.Row="2" Grid.Column="0" Text="Email:"/>
+
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedRecipient.Id}"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedRecipient.Name}"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedRecipient.Email}"/>
+
+		<UniformGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Rows="1">
+			<Button Content="Сохранить" Margin="3,10,3,0" Padding="20,5"
+					Command="{Binding WriteRecipientCommand}" CommandParameter="{Binding SelectedRecipient}" />
+			<Button Content="Создать" Margin="3,10,3,0" Padding="20,5"
+					Command="{Binding CreateRecipientCommand}"/>
+		</UniformGrid>
+	</Grid>
+</UserControl>

@@ -9,9 +9,11 @@
         xmlns:components="clr-namespace:MailSender.Components"
         xmlns:local="clr-namespace:MailSender"
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+		xmlns:v="clr-namespace:MailSender.View"
 		mc:Ignorable="d"
-
-		Title="MainWindow"
+		DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+		
+		Title="{Binding Title}"
 		Height="450" Width="800">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
@@ -32,7 +34,7 @@
 			<DockPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StatusBar}}">
 				<components:TabItemsControl DockPanel.Dock="Right" x:Name="LeftRightButtons" Width="150" Height="16" Margin="0,0,7,0"
 							LeftButtonClick="OnLeftButtonClick" RightButtonClick="OnRightButtonClick" />
-				<TextBlock Text="Текст в статус баре"/>
+				<TextBlock Text="{Binding Status}"/>
 			</DockPanel>
 		</StatusBar>
 		<TabControl x:Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged">
@@ -67,20 +69,15 @@
 										</StackPanel>
 									</DataTemplate>
 								</ComboBox.ItemTemplate>
-								<!--
-								<ComboBoxItem Content="Отправитель1" />
-								<ComboBoxItem Content="Отправитель2" />
-								<ComboBoxItem Content="Отправитель3" />
-								-->
 							</ComboBox>
 							<Button>
-								<Image Source="Media/add.png" />
+								<fa:ImageAwesome Icon="Plus" Foreground="Green"/>
 							</Button>
 							<Button>
-								<Image Source="Media/edit.png" />
+								<fa:ImageAwesome Icon="Edit" Foreground="Blue"/>
 							</Button>
 							<Button>
-								<Image Source="Media/remove.png" />
+								<fa:ImageAwesome Icon="Remove" Foreground="Red"/>
 							</Button>
 						</ToolBar>
 						<ToolBar Band="0" BandIndex="1">
@@ -102,11 +99,6 @@
 										</StackPanel>
 									</DataTemplate>
 								</ComboBox.ItemTemplate>
-								<!--
-								<ComboBoxItem Content="Сервер1" />
-								<ComboBoxItem Content="Сервер2" />
-								<ComboBoxItem Content="Сервер3" />
-								-->
 							</ComboBox>
 							<Button>
 								<fa:ImageAwesome Icon="Plus" Foreground="Green"/>
@@ -131,22 +123,15 @@
 							</Button>
 						</ToolBar>
 					</ToolBarTray>
-					<GroupBox Grid.Row="1" Header="Получатели" Margin="0,3,0,0">
-						<GroupBox.Resources>
-							<linq2sql:MailSenderDB x:Key="Database"/>
-						</GroupBox.Resources>
-						<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipient, Source={StaticResource Database}}"
-								IsReadOnly="True" HeadersVisibility="Column" 
-								GridLinesVisibility="Vertical"
-								VerticalGridLinesBrush="DarkGray"
-								AlternatingRowBackground="Linen">
-							<DataGrid.Columns>
-								<DataGridTextColumn Header="ID" MinWidth="40" Binding="{Binding Id}"/>
-								<DataGridTextColumn Header="Имя" MinWidth="150" Binding="{Binding Name}"/>
-								<DataGridTextColumn Header="eMail" Width="*" Binding="{Binding Email}"/>
-							</DataGrid.Columns>
-						</DataGrid>
-					</GroupBox>
+					<Grid Grid.Row="1" Margin="0,3,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="5*"/>
+							<ColumnDefinition Width="3*"/>
+						</Grid.ColumnDefinitions>
+						<v:RecipientsInfoView Grid.Row="0" Grid.Column="0"/>
+						<v:RecipientInfoEditor Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="10"/>
+						<GridSplitter Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="5" Background="Transparent"/>
+					</Grid>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Планировщик" x:Name="SchedulerTab">
@@ -155,7 +140,7 @@
 						<TextBlock Text="Дата:" Margin="3,0"/>
 						<Calendar></Calendar>
 						<DockPanel>
-							<TextBlock Text="Время:" Margin="3,0"/>
+							<TextBlock Text="Время:" VerticalAlignment="Center" Margin="3,0"/>
 							<xctk:TimePicker Value="15:30" Format="Custom" FormatString="HH:mm"/>
 						</DockPanel>
 						<StackPanel Margin="5,0">

@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -40,6 +41,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
@@ -48,9 +50,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Data\Sender.cs" />
+    <Compile Include="Data\Linq2Sql\Recipient.cs" />
     <Compile Include="Data\TestData.cs" />
     <Compile Include="EmailSender.cs" />
+    <Compile Include="Entityes\Base\BaseEntity.cs" />
+    <Compile Include="Entityes\Base\Human.cs" />
+    <Compile Include="Entityes\MailMessage.cs" />
+    <Compile Include="Entityes\MailsList.cs" />
+    <Compile Include="Entityes\RecipientsList.cs" />
+    <Compile Include="Entityes\SchedulerTask.cs" />
+    <Compile Include="Entityes\Sender.cs" />
+    <Compile Include="Entityes\Server.cs" />
     <Compile Include="MailScheduler.cs" />
     <Compile Include="MVVM\LambdaCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />
@@ -60,8 +70,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\InMemory\DataInMemory.cs" />
+    <Compile Include="Services\InMemory\RecipientsDataInMemory.cs" />
+    <Compile Include="Services\Interfaces\IDataService.cs" />
+    <Compile Include="Services\Interfaces\IMailMessagesData.cs" />
+    <Compile Include="Services\Interfaces\IMailsListsData.cs" />
     <Compile Include="Services\Interfaces\IRecipientsData.cs" />
-    <Compile Include="Services\RecipientsDataLinq2Sql.cs" />
+    <Compile Include="Services\Interfaces\IRecipientsListsData.cs" />
+    <Compile Include="Services\Interfaces\ISchedulerTasksData.cs" />
+    <Compile Include="Services\Interfaces\ISendersData.cs" />
+    <Compile Include="Services\Interfaces\IServersData.cs" />
+    <Compile Include="Services\Linq2SQL\RecipientsDataLinq2Sql.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

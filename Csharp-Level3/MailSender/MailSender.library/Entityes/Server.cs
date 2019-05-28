@@ -1,12 +1,8 @@
-﻿namespace MailSender.lib.Data
-{
-	public class Sender
-	{
-		public string Name { get; set; }
-		public string Email { get; set; }
-	}
+﻿using MailSender.lib.Entityes.Base;
 
-	public class Server
+namespace MailSender.lib.Entityes
+{
+	public class Server : BaseEntity
 	{
 		public string Name { get; set; }
 		public string Address { get; set; }
@@ -15,5 +11,4 @@
 		public string Login { get; set; }
 		public string Password { get; set; }
 	}
-
 }

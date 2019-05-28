@@ -19,7 +19,39 @@
 		<TextBlock DockPanel.Dock="Top" Text="Получатели сообщений" HorizontalAlignment="Center" Margin="0,10,0,5"/>
 		<DockPanel DockPanel.Dock="Top" Margin="5,3">
 			<TextBlock Text="Поиск по имени:" Margin="0,0,5,0"/>
-			<TextBox Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBox Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged, Delay=1000}" >
+				<TextBox.Template>
+					<ControlTemplate TargetType="{x:Type TextBox}">
+						<Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+							<Grid>
+								<ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+								<TextBlock x:Name="PART_Wathermark" Margin="3,0" Text="текст фильтра"
+                                           Foreground="Gray" Visibility="Collapsed"
+                                           HorizontalAlignment="Left" VerticalAlignment="Center"/>
+							</Grid>
+						</Border>
+						<ControlTemplate.Triggers>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="Text" Value=""/>
+									<Condition Property="IsKeyboardFocusWithin" Value="false"/>
+								</MultiTrigger.Conditions>
+								<Setter TargetName="PART_Wathermark" Property="Visibility" Value="Visible"/>
+							</MultiTrigger>
+
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Opacity" TargetName="border" Value="0.56"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="true">
+								<Setter Property="BorderBrush" TargetName="border" Value="Blue"/>
+							</Trigger>
+							<Trigger Property="IsKeyboardFocused" Value="true">
+								<Setter Property="BorderBrush" TargetName="border" Value="DarkBlue"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</TextBox.Template>
+			</TextBox>
 		</DockPanel>
 		<Button DockPanel.Dock="Bottom" Command="{Binding RefreshDataCommand}"
 				HorizontalAlignment="Center" Margin="0,3" Padding="15,3">
@@ -33,7 +65,7 @@
 			</StackPanel>
 		</Button>
 		<DataGrid AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" 
-				ItemsSource="{Binding Recipients}" SelectedItem="{Binding SelectedRecipient}"
+				ItemsSource="{Binding FiltredRecipients}" SelectedItem="{Binding SelectedRecipient}"
 				GridLinesVisibility="Vertical" VerticalGridLinesBrush="DarkGray" AlternatingRowBackground="Linen">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="ID" MinWidth="40" Binding="{Binding Id}"/>

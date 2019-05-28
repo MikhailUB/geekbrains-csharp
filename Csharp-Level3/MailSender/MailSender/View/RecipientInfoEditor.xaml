@@ -4,10 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MailSender.View"
-             mc:Ignorable="d" 
+			 xmlns:vr="clr-namespace:MailSender.ValidationRules"
+			 xmlns:fa="http://schemas.fontawesome.io/icons/"
+			 mc:Ignorable="d" 
 			 DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
-             d:DesignHeight="380" d:DesignWidth="280">
-    <Grid>
+             d:DesignHeight="130" d:DesignWidth="280">
+	<Grid>
+		<Grid.Resources>
+			<Style TargetType="{x:Type TextBox}">
+				<Setter Property="Margin" Value="2,3,15,3"/>
+				<Setter Property="Validation.ErrorTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<DockPanel>
+								<fa:ImageAwesome DockPanel.Dock="Right" Width="14" Foreground="Red" Icon="Warning"
+                                    ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=AdornedElement}"/>
+								<Border BorderBrush="Red" BorderThickness="2"
+                                        Margin="3">
+									<AdornedElementPlaceholder Name="AdornedElement"/>
+								</Border>
+							</DockPanel>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+				<Style.Triggers>
+					<Trigger Property="IsMouseOver" Value="True">
+						<Setter Property="BorderBrush" Value="Blue"/>
+						<Setter Property="Background" Value="AliceBlue"/>
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+		</Grid.Resources>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
@@ -22,10 +49,19 @@
 		<TextBox Grid.Row="1" Grid.Column="0" Text="Имя:"/>
 		<TextBox Grid.Row="2" Grid.Column="0" Text="Email:"/>
 
-		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedRecipient.Id}"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedRecipient.Name}"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedRecipient.Email}"/>
-
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedRecipient.Id, NotifyOnValidationError=True}" IsReadOnly="True"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedRecipient.Name, NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
+		<TextBox Grid.Column="1" Grid.Row="2">
+			<TextBox.Text>
+				<Binding Path="SelectedRecipient.Email" NotifyOnValidationError="True">
+					<Binding.ValidationRules>
+						<NotifyDataErrorValidationRule/>
+						<ExceptionValidationRule/>
+						<vr:RegExValidationRule Pattern="\w+@\w+\.\w+" ErrorMessage="Неверный формат адреса электронной почты"/>
+					</Binding.ValidationRules>
+				</Binding>
+			</TextBox.Text>
+		</TextBox>
 		<UniformGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Rows="1">
 			<Button Content="Сохранить" Margin="3,10,3,0" Padding="20,5"
 					Command="{Binding WriteRecipientCommand}" CommandParameter="{Binding SelectedRecipient}" />

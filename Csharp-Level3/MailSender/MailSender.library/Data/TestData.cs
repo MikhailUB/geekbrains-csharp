@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MailSender.lib.Entityes;
+using System.Collections.Generic;
 
 namespace MailSender.lib.Data
 {

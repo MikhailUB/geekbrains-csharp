@@ -4,7 +4,9 @@ using MailSender.lib.Data.Linq2Sql;
 using MailSender.lib.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MailSender.ViewModel
@@ -31,10 +33,35 @@ namespace MailSender.ViewModel
 			set => Set(ref _status, value);
 		}
 
+		private CollectionViewSource _filtredRecipientsSource;
+
+		private void OnRecipientsFiltred(object sender, FilterEventArgs e)
+		{
+			if (!(e.Item is Recipient recipient))
+				return;
+
+			e.Accepted = string.IsNullOrWhiteSpace(_searchName) ||
+				(recipient.Name != null && recipient.Name.IndexOf(_searchName, StringComparison.OrdinalIgnoreCase) > -1);
+		}
+
+		public ICollectionView FiltredRecipients => _filtredRecipientsSource?.View;
+
 		public ObservableCollection<Recipient> Recipients
 		{
 			get => _recipients;
-			private set => Set(ref _recipients, value);
+			private set
+			{
+				if (!Set(ref _recipients, value))
+					return;
+
+				if (_filtredRecipientsSource != null)
+					_filtredRecipientsSource.Filter -= OnRecipientsFiltred;
+
+				_filtredRecipientsSource = new CollectionViewSource { Source = value };
+				_filtredRecipientsSource.Filter += OnRecipientsFiltred;
+
+				RaisePropertyChanged(nameof(FiltredRecipients));
+			}
 		}
 
 		public Recipient SelectedRecipient
@@ -50,7 +77,8 @@ namespace MailSender.ViewModel
 			{
 				if (Set(ref _searchName, value))
 				{
-					LoadData();
+					_filtredRecipientsSource?.View?.Refresh();
+					//LoadData();
 				}
 			}
 		}
@@ -67,7 +95,7 @@ namespace MailSender.ViewModel
 		}
 		private void OnWriteRecipientCommandExecuted(Recipient recipient)
 		{
-			_recipientsData.Write(recipient);
+			_recipientsData.Edit(recipient);
 			_recipientsData.SaveChanges();
 		}
 
@@ -76,7 +104,7 @@ namespace MailSender.ViewModel
 		private void OnCreateRecipientCommandExecuted()
 		{
 			var recipient = new Recipient { Name = "Новый получатель", Email = "new@address.com" };
-			var id = _recipientsData.Create(recipient);
+			var id = _recipientsData.Add(recipient);
 			if (id != 0)
 			{
 				Recipients.Add(recipient);
@@ -98,8 +126,8 @@ namespace MailSender.ViewModel
 		private void LoadData()
 		{
 			var recipients = _recipientsData.GetAll();
-			if (!string.IsNullOrEmpty(_searchName))
-				recipients = recipients.Where(r => r.Name.IndexOf(_searchName, StringComparison.OrdinalIgnoreCase) > -1);
+			//if (!string.IsNullOrEmpty(_searchName))
+			//	recipients = recipients.Where(r => r.Name.IndexOf(_searchName, StringComparison.OrdinalIgnoreCase) > -1);
 
 			Recipients = new ObservableCollection<Recipient>(recipients);
 		}

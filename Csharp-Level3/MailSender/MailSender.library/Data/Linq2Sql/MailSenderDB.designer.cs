@@ -20,8 +20,8 @@ namespace MailSender.lib.Data.Linq2Sql
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
+	using MailSender.lib.Entityes.Base;
+
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="MailSender.db")]
 	public partial class MailSenderDB : System.Data.Linq.DataContext
 	{
@@ -75,13 +75,12 @@ namespace MailSender.lib.Data.Linq2Sql
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Recipients")]
-	public partial class Recipient : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Recipient : BaseEntity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
+
 		private int _Id;
-		
 		private string _Name;
 		
 		private string _Email;
@@ -104,19 +103,19 @@ namespace MailSender.lib.Data.Linq2Sql
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public override int Id
 		{
 			get
 			{
-				return this._Id;
+				return _Id;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((_Id != value))
 				{
 					this.OnIdChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
+					_Id = value;
 					this.SendPropertyChanged("Id");
 					this.OnIdChanged();
 				}

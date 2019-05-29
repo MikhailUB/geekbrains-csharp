@@ -1,5 +1,5 @@
-﻿using MailSender.lib.Data.Linq2Sql;
-using MailSender.lib.Entityes;
+﻿using MailSender.lib.Entityes;
+using MailSender.lib.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
@@ -10,18 +10,20 @@ namespace MailSender.lib
 	{
 		private DispatcherTimer _timer = new DispatcherTimer();
 		private DateTime _dateSend;
-		private EmailSender _emailSender;
+		private IMailSender _emailSender;
+		private Sender _from;
 		private ObservableCollection<Recipient> _recipients;
 		private MailMessage _message;
 
-		public MailScheduler(EmailSender emailSender)
+		public MailScheduler(IMailSender emailSender)
 		{
 			_emailSender = emailSender;
 		}
 
-		public void SendEmails(DateTime dateSend, ObservableCollection<Recipient> recipients, MailMessage message)
+		public void SendEmails(DateTime dateSend, Sender from, ObservableCollection<Recipient> recipients, MailMessage message)
 		{
 			_dateSend = dateSend;
+			_from = from;
 			_recipients = recipients;
 			_message = message;
 
@@ -35,7 +37,7 @@ namespace MailSender.lib
 			if (_dateSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
 			{
 				_timer.Stop();
-				_emailSender.SendMails(_recipients, _message);
+				_emailSender.Send(_message, _from, _recipients);
 			}
 		}
 	}

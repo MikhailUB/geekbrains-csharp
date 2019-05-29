@@ -3,10 +3,8 @@ using MailSender.lib.Entityes.Base;
 
 namespace MailSender.lib.Entityes
 {
-	public class MailsList : BaseEntity
+	public class MailsList : NamedEntity
 	{
-		public string Name { get; set; }
-
 		public IEnumerable<MailMessage> Messages { get; set; }
 	}
 }

@@ -1,5 +1,4 @@
-﻿using MailSender.lib.Data.Linq2Sql;
-using System.Collections.Generic;
+﻿using MailSender.lib.Entityes;
 
 namespace MailSender.lib.Services.Interfaces
 {

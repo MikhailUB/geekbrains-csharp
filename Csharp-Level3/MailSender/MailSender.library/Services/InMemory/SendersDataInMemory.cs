@@ -1,23 +1,14 @@
 ﻿using MailSender.lib.Data;
 using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
-using System.Linq;
 
 namespace MailSender.lib.Services.InMemory
 {
-	public class RecipientsDataInMemory : DataInMemory<Recipient>, IRecipientsData
+	public class SendersDataInMemory : DataInMemory<Sender>, ISendersData
 	{
-		public RecipientsDataInMemory()
-		{
-			_items.AddRange(TestData.Senders.Select((s, i) => new Recipient
-			{
-				Id = i + 1,
-				Name = s.Name,
-				Email = s.Email
-			}));
-		}
+		public SendersDataInMemory() => _items.AddRange(TestData.Senders);
 
-		public override void Edit(Recipient item)
+		public override void Edit(Sender item)
 		{
 			var dbItem = GetById(item.Id);
 			if (dbItem is null || ReferenceEquals(dbItem, item))

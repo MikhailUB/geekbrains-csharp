@@ -1,4 +1,4 @@
-﻿using MailSender.lib.Data.Linq2Sql;
+﻿using MailSender.lib.Entityes;
 using MailSender.lib.Services.InMemory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

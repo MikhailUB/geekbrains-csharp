@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using MailSender.lib.Data.Linq2Sql;
+using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
@@ -14,6 +14,12 @@ namespace MailSender.ViewModel
 	public class MainWindowViewModel : ViewModelBase
 	{
 		private readonly IRecipientsData _recipientsData;
+		private readonly IRecipientsListsData _recipientsListsData;
+		private readonly ISendersData _sendersData;
+		private readonly IMailMessagesData _mailMessagesData;
+		private readonly IMailsListsData _mailsListsData;
+		private readonly IServersData _serversData;
+		private readonly ISchedulerTasksData _schedulerTasksData;
 
 		private string _title = "Рассыльщик почты v1";
 		private string _status = "К отправке почты готов!";
@@ -114,9 +120,22 @@ namespace MailSender.ViewModel
 
 		#endregion
 
-		public MainWindowViewModel(IRecipientsData recipientsData)
+		public MainWindowViewModel(
+					IRecipientsData recipientsData,
+					IRecipientsListsData recipientsListsData,
+					ISendersData sendersData,
+					IMailMessagesData mailMessagesData,
+					IMailsListsData mailsListsData,
+					IServersData serversData,
+					ISchedulerTasksData schedulerTasksData)
 		{
 			_recipientsData = recipientsData;
+			_recipientsListsData = recipientsListsData;
+			_sendersData = sendersData;
+			_mailMessagesData = mailMessagesData;
+			_mailsListsData = mailsListsData;
+			_serversData = serversData;
+			_schedulerTasksData = schedulerTasksData;
 
 			RefreshDataCommand = new RelayCommand(OnRefreshDataCommandExecuted, CanRefreshDataCommandExecute);
 			WriteRecipientCommand = new RelayCommand<Recipient>(OnWriteRecipientCommandExecuted, CanWriteRecipientCommandExecute);

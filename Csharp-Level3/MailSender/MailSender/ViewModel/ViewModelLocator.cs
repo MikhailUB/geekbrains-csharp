@@ -1,58 +1,35 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:MailSender"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
-
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using MailSender.lib.Data.Linq2Sql;
 using MailSender.lib.Services;
+using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
+using System;
 
 namespace MailSender.ViewModel
 {
-	/// <summary>
-	/// This class contains static references to all the view models in the
-	/// application and provides an entry point for the bindings.
-	/// </summary>
 	public class ViewModelLocator
 	{
-		/// <summary>
-		/// Initializes a new instance of the ViewModelLocator class.
-		/// </summary>
 		public ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-			////if (ViewModelBase.IsInDesignModeStatic)
-			////{
-			////    // Create design time view services and models
-			////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-			////}
-			////else
-			////{
-			////    // Create run time view services and models
-			////    SimpleIoc.Default.Register<IDataService, DataService>();
-			////}
+			SimpleIoc.Default.TryRegister(() => new MailSenderDB());
 
-			SimpleIoc.Default.Register(() => new MailSenderDB());
-			SimpleIoc.Default.Register<IRecipientsData, RecipientsDataLinq2Sql>();
+			SimpleIoc.Default
+			   .TryRegister<IRecipientsData, RecipientsDataInMemory>()
+			   .TryRegister<IRecipientsListsData, RecipientsListsDataInMemory>()
+			   .TryRegister<IServersData, ServersDataInMemory>()
+			   .TryRegister<IMailMessagesData, MailMessagesDataInMemory>()
+			   .TryRegister<IMailsListsData, MailsListDataInMemory>()
+			   .TryRegister<ISchedulerTasksData, SchedulerTasksDataInMemory>()
+			   .TryRegister<ISendersData, SendersDataInMemory>();
 
-			SimpleIoc.Default.Register<MainViewModel>();
+			SimpleIoc.Default.TryRegister<MainWindowViewModel>();
+
 			SimpleIoc.Default.Register<MainWindowViewModel>();
 		}
-
-		public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
 		public MainWindowViewModel MainWindowModel => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
 
@@ -61,4 +38,33 @@ namespace MailSender.ViewModel
 			// TODO Clear the ViewModels
 		}
 	}
+
+	internal static class SimpleIocExtensions
+	{
+		public static SimpleIoc TryRegister<T>(this SimpleIoc container, Func<T> factory) where T : class
+		{
+			if (container.IsRegistered<T>()) return container;
+
+			container.Register(factory);
+			return container;
+		}
+
+		public static SimpleIoc TryRegister<T>(this SimpleIoc container) where T : class
+		{
+			if (container.IsRegistered<T>()) return container;
+
+			container.Register<T>();
+			return container;
+		}
+
+		public static SimpleIoc TryRegister<TInterface, TClass>(this SimpleIoc container)
+			where TInterface : class
+			where TClass : class, TInterface
+		{
+			if (container.IsRegistered<TInterface>()) return container;
+			container.Register<TInterface, TClass>();
+			return container;
+		}
+	}
+
 }

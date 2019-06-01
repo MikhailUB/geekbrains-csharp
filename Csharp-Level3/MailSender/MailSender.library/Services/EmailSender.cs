@@ -1,9 +1,11 @@
 ﻿using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MailSender.lib.Services
 {
@@ -63,6 +65,25 @@ namespace MailSender.lib.Services
 		{
 			foreach (var recipient in to)
 				ThreadPool.QueueUserWorkItem(_ => Send(message, from, recipient));
+		}
+
+		public async Task SendAsync(Entityes.MailMessage message, Sender From, Recipient To)
+		{
+			using (var client = new SmtpClient(_server, _port) { Credentials = new NetworkCredential(_login, _password) })
+			using (var msg = new System.Net.Mail.MailMessage())
+			{
+				msg.From = new MailAddress(From.Email, From.Name);
+				msg.To.Add(new MailAddress(To.Email, To.Name));
+				msg.Subject = message.Subject;
+				msg.Body = message.Body;
+
+				await client.SendMailAsync(msg).ConfigureAwait(false);
+			}
+		}
+
+		public async Task SendAsync(Entityes.MailMessage message, Sender from, IEnumerable<Recipient> to)
+		{
+			await Task.WhenAll(to.Select(rec => SendAsync(message, from, rec)));
 		}
 	}
 }

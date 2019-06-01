@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.library.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadCalcConsoleApp", "ThreadCalcConsoleApp\ThreadCalcConsoleApp.csproj", "{1DF84038-FFCA-466B-91F1-1DFBC165E353}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixMultiplicationConsoleApp", "MatrixMultiplicationConsoleApp\MatrixMultiplicationConsoleApp.csproj", "{2D2CF505-8EA8-4047-B68A-53DD0307F4AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1DF84038-FFCA-466B-91F1-1DFBC165E353}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF84038-FFCA-466B-91F1-1DFBC165E353}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF84038-FFCA-466B-91F1-1DFBC165E353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D2CF505-8EA8-4047-B68A-53DD0307F4AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D2CF505-8EA8-4047-B68A-53DD0307F4AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D2CF505-8EA8-4047-B68A-53DD0307F4AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D2CF505-8EA8-4047-B68A-53DD0307F4AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

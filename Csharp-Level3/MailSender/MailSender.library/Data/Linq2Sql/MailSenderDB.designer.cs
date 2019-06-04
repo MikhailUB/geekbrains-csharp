@@ -75,7 +75,7 @@ namespace MailSender.lib.Data.Linq2Sql
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Recipients")]
-	public partial class Recipient : BaseEntity, INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Recipient : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -103,7 +103,7 @@ namespace MailSender.lib.Data.Linq2Sql
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public override int Id
+		public int Id
 		{
 			get
 			{

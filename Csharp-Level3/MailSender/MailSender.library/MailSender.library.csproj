@@ -31,8 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -44,7 +51,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.cs" />
+    <Compile Include="Data\EF\MailSenderDBContext.cs" />
+    <Compile Include="Data\EF\Migrations\201906041850562_Initial.cs" />
+    <Compile Include="Data\EF\Migrations\201906041850562_Initial.Designer.cs">
+      <DependentUpon>201906041850562_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EF\Migrations\201906042045054_RecipientAddComment.cs" />
+    <Compile Include="Data\EF\Migrations\201906042045054_RecipientAddComment.Designer.cs">
+      <DependentUpon>201906042045054_RecipientAddComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EF\Migrations\Configuration.cs" />
     <Compile Include="Data\Linq2Sql\MailSenderDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -52,6 +68,9 @@
     </Compile>
     <Compile Include="Data\Linq2Sql\Recipient.cs" />
     <Compile Include="Data\TestData.cs" />
+    <Compile Include="Entityes\Base\NamedEntity.cs" />
+    <Compile Include="Entityes\Recipient.cs" />
+    <Compile Include="Services\EF\RecipientsDataEF.cs" />
     <Compile Include="Services\EmailSender.cs" />
     <Compile Include="Entityes\Base\BaseEntity.cs" />
     <Compile Include="Entityes\Base\Human.cs" />
@@ -89,7 +108,14 @@
     <Compile Include="Services\Interfaces\IServersData.cs" />
     <Compile Include="Services\Linq2SQL\RecipientsDataLinq2Sql.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Data\EF\Migrations\201906041850562_Initial.resx">
+      <DependentUpon>201906041850562_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\EF\Migrations\201906042045054_RecipientAddComment.resx">
+      <DependentUpon>201906042045054_RecipientAddComment.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Data\Linq2Sql\MailSenderDB.dbml">
@@ -100,6 +126,7 @@
     <None Include="Data\Linq2Sql\MailSenderDB.dbml.layout">
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

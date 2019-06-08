@@ -5,8 +5,6 @@ namespace MailSender.lib.Entityes
 {
 	public class RecipientsList : NamedEntity
 	{
-		public IEnumerable<Recipient> Recipients { get; set; }
+		public virtual IEnumerable<Recipient> Recipients { get; set; }
 	}
-
-	public class Recipient : Human { }
 }

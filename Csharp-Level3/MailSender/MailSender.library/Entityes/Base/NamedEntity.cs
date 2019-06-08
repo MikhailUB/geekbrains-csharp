@@ -2,9 +2,9 @@
 
 namespace MailSender.lib.Entityes.Base
 {
-	public abstract class Human : NamedEntity
+	public abstract class NamedEntity : BaseEntity
 	{
 		[Required]
-		public string Email { get; set; }
+		public string Name { get; set; }
 	}
 }

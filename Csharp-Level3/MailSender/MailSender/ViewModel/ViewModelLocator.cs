@@ -1,5 +1,4 @@
 using CommonServiceLocator;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using MailSender.lib.Data.Linq2Sql;
 using MailSender.lib.Services;
@@ -15,9 +14,10 @@ namespace MailSender.ViewModel
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-			SimpleIoc.Default.TryRegister(() => new MailSenderDB());
+			var services = SimpleIoc.Default;
+			services.TryRegister(() => new MailSenderDB());
 
-			SimpleIoc.Default
+			services
 			   .TryRegister<IRecipientsData, RecipientsDataInMemory>()
 			   .TryRegister<IRecipientsListsData, RecipientsListsDataInMemory>()
 			   .TryRegister<IServersData, ServersDataInMemory>()
@@ -26,9 +26,12 @@ namespace MailSender.ViewModel
 			   .TryRegister<ISchedulerTasksData, SchedulerTasksDataInMemory>()
 			   .TryRegister<ISendersData, SendersDataInMemory>();
 
-			SimpleIoc.Default.TryRegister<MainWindowViewModel>();
+			//services
+			//   .TryRegister<IRecipientsData, RecipientsDataEF>();
 
-			SimpleIoc.Default.Register<MainWindowViewModel>();
+			services.TryRegister<IMailSenderService, SmtpMailSenderService>();
+
+			services.TryRegister<MainWindowViewModel>();
 		}
 
 		public MainWindowViewModel MainWindowModel => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
